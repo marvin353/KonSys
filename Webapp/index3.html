@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="js/script1.js"></script>
+</head>
+<body>
+
+<div class="topnav">
+    <h1 class="h1head">Context Sensitive Systems Exercice</h1>
+    <!--a class="active" href="#home">Home</a-->
+</div>
+
+<div style="padding-left:0px">
+
+    <div class="mainContainer">
+        <h2>Sensor Data Logging</h2>
+        <label class="switch">
+            <input type="checkbox" id="myCheck" onclick="switched()">
+            <span class="slider round"></span>
+        </label>
+        <p>Values:</p>
+        <p id="text"></p>
+        <form>
+            <!--label for="fname">Context:</label><br-->
+            <input type="text" id="Context" name="Context">
+        </form>
+    </div>
+
+    <hr class="solid">
+
+    <div class="requestPermissionsContainer">
+        <p>Request permission for data logging on iOS devices</p>
+        <input class="button requestPermissions" type="button" id="request" value="Request permissions">
+    </div>
+
+
+</div>
+
+
+
+</body>
+</html>
+
