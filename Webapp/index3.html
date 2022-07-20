@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript" src="js/script1.js"></script>
 </head>
-<body>
+<body onload="init()">
 
 <div class="topnav">
     <h1 class="h1head">Context Sensitive Systems Exercice</h1>
@@ -17,14 +17,14 @@
     <div class="mainContainer">
         <h2>Sensor Data Logging</h2>
         <label class="switch">
-            <input type="checkbox" id="myCheck" onclick="switched()">
+            <input type="checkbox" id="DeviceOrientation_Switch" onclick="device_orientation_switched()">
             <span class="slider round"></span>
         </label>
         <p>Values:</p>
-        <p id="text"></p>
+        <p id="DeviceOrientation_Text"></p>
         <form>
             <!--label for="fname">Context:</label><br-->
-            <input type="text" id="Context" name="Context">
+            <!--input type="text" id="Context" name="Context"-->
         </form>
     </div>
 
@@ -32,7 +32,7 @@
 
     <div class="requestPermissionsContainer">
         <p>Request permission for data logging on iOS devices</p>
-        <input class="button requestPermissions" type="button" id="request" value="Request permissions">
+        <input class="button requestPermissions" type="button" id="requestBtn" value="Request permissions">
     </div>
 
 

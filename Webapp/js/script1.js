@@ -1,77 +1,100 @@
-function requestAction() {
-    DeviceOrientationEvent.requestPermission()
-        .then(response => {
-            if (response == 'granted') {
-                window.addEventListener('deviceorientation', (e) => {
-                    // do something with e
-                })
-            }
-        })
-        .catch(console.error)
+//------------------------------------ Main initialization function ------------------------------------\\
+
+function init() {
+    // Button for requesting permissions on iOS devices
+    var btn = document.getElementById("requestBtn");
+    btn.addEventListener( "click", permission );
 }
 
-function handleMotionEvent(event) {
-    var b = event.beta;
-    var g = event.gamma;
-    var a = event.alpha;
 
-    var text = document.getElementById("text");
-    text.innerText = "Alpha:" + a + ", Beta:" + b + ", Gamma:" + g;
+//------------------------------------------ Sensor settings ------------------------------------------\\
+
+function handleDeviceOrientationEvent(event) {
+    var b = precise(event.beta);
+    var g = precise(event.gamma);
+    var a = precise(event.alpha);
+
+    var text = document.getElementById("DeviceOrientation_Text");
+    text.innerText = "Alpha:" + a + "\n, Beta:" + b + "\n, Gamma:" + g;
 }
 
-function switched() {
-    var checkBox = document.getElementById("myCheck");
+function handleDeviceMotionEvent(event) {
+    var x = precise(event.acceleration.x);
+    var y = precise(event.acceleration.y);
+    var z = precise(event.acceleration.z);
+
+    var text = document.getElementById("DeviceMotion_Text");
+    text.innerText = "X:" + x + "\n, Y:" + y + "\n, Z:" + z;
+}
+
+function device_orientation_switched() {
+    var checkBox = document.getElementById("DeviceOrientation_Switch");
     if (checkBox.checked == true){
         if (window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', handleMotionEvent, false);
+            window.addEventListener('deviceorientation', handleDeviceOrientationEvent, false);
         }
     } else {
         if (window.DeviceOrientationEvent) {
-            window.removeEventListener('deviceorientation', handleMotionEvent, false);
+            window.removeEventListener('deviceorientation', handleDeviceOrientationEvent, false);
+        }
+    }
+}
+
+function device_motion_switched() {
+    var checkBox = document.getElementById("DeviceMotion_Switch");
+    if (checkBox.checked == true){
+        if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', handleDeviceMotionEvent, false);
+        }
+    } else {
+        if (window.DeviceMotionEvent) {
+            window.removeEventListener('devicemotion', handleDeviceMotionEvent, false);
         }
     }
 }
 
 
-function onClick() {
-    var checkBox = document.getElementById("myCheck");
+//--------------------------------------- Helper functions ---------------------------------------\\
 
-    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        // Handle iOS 13+ devices.
-        DeviceOrientationEvent.requestPermission()
-            .then((state) => {
-                if (state === 'granted') {
-                    window.addEventListener('deviceorientation', handleMotionEvent, false);
-                } else {
-                    console.error('Request to access the orientation was rejected');
-                }
-            })
-            .catch(console.error);
-    } else {
-        // Handle regular non iOS 13+ devices.
-        window.addEventListener('deviceorientation', handleMotionEvent,false);
-    }
+function precise(x) {
+    return x.toPrecision(6);
 }
 
-/*if ( location.protocol != "https:" ) {
-location.href = "https:" + window.location.href.substring( window.location.protocol.length );
-}*/
-function permission () {
+
+//------------------------------ Permission request for iOS devices ------------------------------\\
+
+function permission() {
+    console.log("Request for permissions");
+
     if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
         // (optional) Do something before API request prompt.
         DeviceMotionEvent.requestPermission()
             .then( response => {
                 // (optional) Do something after API prompt dismissed.
-                if ( response == "granted" ) {
+                /*if ( response == "granted" ) {
                     window.addEventListener( "devicemotion", (e) => {
                         // do something for 'e' here.
                     })
-                }
+                }*/
             })
             .catch( console.error )
     } else {
         alert( "DeviceMotionEvent is not defined" );
     }
+
+    if ( typeof( DeviceOrientationEvent ) !== "undefined" && typeof( DeviceOrientationEvent.requestPermission ) === "function" ) {
+        // (optional) Do something before API request prompt.
+        DeviceOrientationEvent.requestPermission()
+            .then( response => {
+                // (optional) Do something after API prompt dismissed.
+                /*if ( response == "granted" ) {
+                    window.addEventListener( "devicemotion", (e) => {
+                        // do something for 'e' here.
+                    })
+                }*/
+            })
+            .catch( console.error )
+    } else {
+        alert( "DeviceOrientationEvent is not defined" );
+    }
 }
-const btn = document.getElementById( "request" );
-btn.addEventListener( "click", permission );
