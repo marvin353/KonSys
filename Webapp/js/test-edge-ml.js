@@ -1,35 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-    </head>
+async function bla() {
 
-    <body>
-        <p>Test</p>
-    </body>
-</html>
 
-<!--script src="https://unpkg.com/edge-ml"></script-->
-<script src="https://unpkg.com/edge-ml/dist/bundle.js"></script>
-<script>
-    sendDataset = edgeML.sendDataset;
-    datasetCollector = edgeML.datasetCollector
-    Predictor = edgeML.Predictor
-</script>
-<script>
+    //const datasetCollector = require("explorer-node").datasetCollector;
+    const sendDataset = require("edge-ml").sendDataset;
+    const datasetCollector = require("edge-ml").datasetCollector;
+    const Predictor = require("edge-ml").Predictor;
+
     // Generate collector function
-    try {
+    //try {
         const collector = await datasetCollector(
             "https://app.edge-ml.org",
             "UeeUAy9qKbgxRiLjRkn5JSqImW3zQ9JmkcCRgUJigoYQ7D8NpShj6F1sh3WeZG0VisWZMNKJsYy6/YSWLRMaFQ==",
             "DATASET_NAME",
             false,
-            { "KEY": "VALUE" },
+            {"KEY": "VALUE"},
             "labeling_label"
         );
-    } catch (e) {
+    //} catch (e) {
         // Error occurred, cannot use the collector as a function to upload
-        console.log(e);
-    }
+     //   console.log(e);
+   // }
 
     try {
         // time should be a unix timestamp
@@ -39,7 +29,8 @@
         // Uploads all remaining data points to the server
         await collector.onComplete();
     } catch (e) {
-        // Error adding data points
         console.log(e);
     }
-</script>
+}
+
+bla();
