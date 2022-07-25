@@ -1,171 +1,62 @@
-<!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/index.js"></script>
+    <script src="https://unpkg.com/edge-ml"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
+<div class="topnav">
+    <h1 class="h1head">ConSys Exercice</h1>
+</div>
+<div style="padding-left: 0px;">
+    <div class="mainContainer">
+        <h2>Select Label</h2>
+        <input class="cwt_btn" type="button" id="tableBtn" value="table" />
+        <input class="cwt_btn" type="button" id="walkBtn" value="walk" />
+        <input class="cwt_btn" type="button" id="carBtn" value="car" />
+    </div>
 
-<h2>Kontext Sensitive Systeme Exercise 2</h2>
+    <div class="mainContainer">
+        <h2>Upload Data</h2>
+        <label class="switch">
+            <input type="checkbox" id="Upload_Switch" />
+            <span class="slider round"></span>
+        </label>
+    </div>
 
-<label class="switch">
-	<input type="checkbox" id="myCheck" onclick="switched()">
-	<span class="slider round"></span>
-</label>
-<p>Values:</p>
-<p id="text"></p>
-<form>
-  <label for="fname">Context:</label><br>
-  <input type="text" id="Context" name="Context"><br>
-</form>
-<input type="button" id="request" value="Request permissions">
+    <div class="mainContainer">
+        <h2>Device Orientation</h2>
+        <label class="switch">
+            <input type="checkbox" id="DeviceOrientation_Switch" />
+            <span class="slider round"></span>
+        </label>
+        <p>Values:</p>
+        <p id="DeviceOrientation_Text"></p>
+    </div>
 
+    <div class="mainContainer">
+        <h2>Device Motion</h2>
+        <label class="switch">
+            <input type="checkbox" id="DeviceMotion_Switch" />
+            <span class="slider round"></span>
+        </label>
+        <p>Values:</p>
+        <p id="DeviceMotion_Text"></p>
+    </div>
 
+    <hr class="solid" />
 
+    <div class="requestPermissionsContainer">
+        <p>Request permission for data logging on iOS devices</p>
+        <input
+                class="button requestPermissions"
+                type="button"
+                id="requestBtn"
+                value="Request permissions"
+        />
+    </div>
+</div>
 </body>
-</html> 
-
-<script type="text/javascript">
-	function requestAction() {
-		DeviceOrientationEvent.requestPermission()
-			.then(response => {
-				if (response == 'granted') {
-    				window.addEventListener('deviceorientation', (e) => {
-      					// do something with e
-    				})
-  				}
-			})
-		.catch(console.error)
-	}
-	
-	function handleMotionEvent(event) {
-		var b = event.beta;
-		var g = event.gamma;
-		var a = event.alpha;
-		
-		var text = document.getElementById("text");
-		text.innerText = "Alpha:" + a + ", Beta:" + b + ", Gamma:" + g;
-	}
-	
-	function switched() {
-		var checkBox = document.getElementById("myCheck");
-		if (checkBox.checked == true){
-			if (window.DeviceOrientationEvent) {
-  				window.addEventListener('deviceorientation', handleMotionEvent, false);
-			}
-		} else {
-			if (window.DeviceOrientationEvent) {
-  				window.removeEventListener('deviceorientation', handleMotionEvent, false);
-			}
-		}
-	}
-	
-	
-	function onClick() {
-		var checkBox = document.getElementById("myCheck");
-		
-		if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-			// Handle iOS 13+ devices.
-			DeviceOrientationEvent.requestPermission()
-				.then((state) => {
-					if (state === 'granted') {
-						window.addEventListener('deviceorientation', handleMotionEvent, false);
-					} else {
-						console.error('Request to access the orientation was rejected');
-					}
-				})
-			.catch(console.error);
-		} else {
-			// Handle regular non iOS 13+ devices.
-			window.addEventListener('deviceorientation', handleMotionEvent,false);
-		}
-	}
-	
-/*if ( location.protocol != "https:" ) {
-location.href = "https:" + window.location.href.substring( window.location.protocol.length );
-}*/
-	function permission () {
-        console.log("Request for permissions");
-	    if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
-	        // (optional) Do something before API request prompt.
-	        DeviceMotionEvent.requestPermission()
-	            .then( response => {
-	            // (optional) Do something after API prompt dismissed.
-	            if ( response == "granted" ) {
-	                window.addEventListener( "devicemotion", (e) => {
-	                    // do something for 'e' here.
-	                })
-	            }
-	        })
-	            .catch( console.error )
-	    } else {
-	        alert( "DeviceMotionEvent is not defined" );
-	    }
-	}
-	const btn = document.getElementById( "request" );
-	btn.addEventListener( "click", permission );
-    
-
-	
-</script>
-
+</html>
