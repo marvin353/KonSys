@@ -1,62 +1,62 @@
 <html>
-<head>
+  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/styles.css" />
     <script src="js/index.js"></script>
     <script src="https://unpkg.com/edge-ml"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-<div class="topnav">
-    <h1 class="h1head">ConSys Exercice</h1>
-</div>
-<div style="padding-left: 0px;">
-    <div class="mainContainer">
+  </head>
+  <body>
+    <div class="topnav">
+      <h1 class="h1head">ConSys Exercice</h1>
+    </div>
+    <div style="padding-left: 0px;">
+      <div class="mainContainer">
         <h2>Select Label</h2>
         <input class="cwt_btn" type="button" id="tableBtn" value="table" />
         <input class="cwt_btn" type="button" id="walkBtn" value="walk" />
         <input class="cwt_btn" type="button" id="carBtn" value="car" />
-    </div>
+      </div>
 
-    <div class="mainContainer">
+      <div class="mainContainer">
         <h2>Upload Data</h2>
         <label class="switch">
-            <input type="checkbox" id="Upload_Switch" />
-            <span class="slider round"></span>
+          <input type="checkbox" id="Upload_Switch" />
+          <span class="slider round"></span>
         </label>
-    </div>
+      </div>
 
-    <div class="mainContainer">
+      <div class="mainContainer">
         <h2>Device Orientation</h2>
         <label class="switch">
-            <input type="checkbox" id="DeviceOrientation_Switch" />
-            <span class="slider round"></span>
+          <input type="checkbox" id="DeviceOrientation_Switch" />
+          <span class="slider round"></span>
         </label>
         <p>Values:</p>
         <p id="DeviceOrientation_Text"></p>
-    </div>
+      </div>
 
-    <div class="mainContainer">
+      <div class="mainContainer">
         <h2>Device Motion</h2>
         <label class="switch">
-            <input type="checkbox" id="DeviceMotion_Switch" />
-            <span class="slider round"></span>
+          <input type="checkbox" id="DeviceMotion_Switch" />
+          <span class="slider round"></span>
         </label>
         <p>Values:</p>
         <p id="DeviceMotion_Text"></p>
-    </div>
+      </div>
 
-    <hr class="solid" />
+      <hr class="solid" />
 
-    <div class="requestPermissionsContainer">
+      <div class="requestPermissionsContainer">
         <p>Request permission for data logging on iOS devices</p>
         <input
-                class="button requestPermissions"
-                type="button"
-                id="requestBtn"
-                value="Request permissions"
+          class="button requestPermissions"
+          type="button"
+          id="requestBtn"
+          value="Request permissions"
         />
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

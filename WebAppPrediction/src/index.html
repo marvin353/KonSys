@@ -1,45 +1,46 @@
 <html>
-<head>
+  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/styles.css" />
     <script src="js/index.js"></script>
     <script src="https://unpkg.com/edge-ml"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-<div class="topnav">
-    <h1 class="h1head">ConSys Exercice</h1>
-</div>
-<div style="padding-left: 0px;">
-    <div class="mainContainer">
-        <h2>Upload Data</h2>
-        <label class="switch">
-            <input type="checkbox" id="Prediction_Switch" />
-            <span class="slider round"></span>
-        </label>
+  </head>
+  <body>
+    <div class="topnav">
+      <h1 class="h1head">Prediction App</h1>
     </div>
 
-    <div class="mainContainer">
-        <h2>Device Orientation</h2>
+    <div style="padding-left: 0px; padding-top: 10%;">
+      <div class="mainContainer">
+        <h1 id="prediction">Prediction</h1>
+      </div>
+
+      <div class="mainContainer">
+        <h3>Predict</h3>
         <label class="switch">
-            <input type="checkbox" id="DeviceOrientation_Switch" />
-            <span class="slider round"></span>
+          <input type="checkbox" id="Upload_Switch" />
+          <span class="slider round"></span>
         </label>
+      </div>
+
+      <div class="mainContainer">
+        <h3>Device Motion</h3>
         <p>Values:</p>
-        <p id="DeviceOrientation_Text"></p>
-    </div>
+        <p id="DeviceMotion_Text"></p>
+      </div>
 
-    <hr class="solid" />
+      <hr class="solid" />
 
-    <div class="requestPermissionsContainer">
+      <div class="requestPermissionsContainer">
         <p>Request permission for data logging on iOS devices</p>
         <input
-                class="button requestPermissions"
-                type="button"
-                id="requestBtn"
-                value="Request permissions"
+          class="button requestPermissions"
+          type="button"
+          id="requestBtn"
+          value="Request permissions"
         />
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>
